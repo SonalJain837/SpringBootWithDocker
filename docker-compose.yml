@@ -1,0 +1,25 @@
+version: "3"
+services:
+  database:
+   image: buildo/h2database:latest
+   restart: always
+   container_name: "h2_db"
+   environment:
+     - H2_USER=sa
+   ports:
+     - "8082:8082"
+  api:
+   build: .
+   links:
+     - database
+   restart: on-failure
+   container_name: "spring_api"
+   environment:
+     - H2DB_PORT=8080
+     - H2DB_SCHEMA=jdbc:h2:mem:testdb
+     - H2DB_HOST=h2_db
+     - LOG_LEVEL=DEBUG
+   ports:
+     - "8001:8001"
+   depends_on:
+     - database
