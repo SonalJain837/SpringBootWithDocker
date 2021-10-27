@@ -11,9 +11,9 @@ import javax.persistence.Table;
 @Table
 public class Topic {
 	
-	//@GeneratedValue(generator = "UUID")
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(generator = "UUID")
 	private int id;
 	
 	@Column

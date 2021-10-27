@@ -1,6 +1,9 @@
 package com.topic.RestfulApiSpringBoot.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +30,30 @@ public class TopicService {
 		}
 		
 		return topicRepo.save(topic);		
+	}
+
+	public java.util.List getAllTopic() {
+		return topicRepo.findAll();
+	}
+
+	public Topic getTopicById(int id) {
+		
+		Topic theTopic = topicRepo.findById(id);
+		if(theTopic.getId() == id ) {
+			 return theTopic;
+		}
+		else {
+			throw new TopicNotSaveException("Topic not present...");
+		}
+		
+	}
+
+	public Topic updateTopic(int id, Topic topic) {
+	Topic thetopic = topicRepo.findById(id);
+	thetopic.setTopicName(topic.getTopicName());
+	thetopic.setDescription(topic.getDescription());
+	return thetopic;
+
 	}
 
 	
