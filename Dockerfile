@@ -4,7 +4,6 @@ RUN mvn dependency:go-offline -B
 COPY ./src ./src
 RUN mvn package -DskipTests
 FROM openjdk:11-jdk
-FROM cockroachdb/cockroach
 WORKDIR /my-project
 COPY --from=maven target/RestfulApiSpringBoot-0.0.1-SNAPSHOT.jar ./
 EXPOSE 8001
